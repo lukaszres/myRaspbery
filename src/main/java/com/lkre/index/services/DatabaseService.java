@@ -1,10 +1,11 @@
 package com.lkre.index.services;
 
+import java.math.BigDecimal;
 import java.sql.*;
 
 public class DatabaseService {
 
-    private final String INSERT_LOG = "INSERT INTO tb_temperatures"
+    private final String INSERT_TEMPERATURE = "INSERT INTO tb_temperatures"
             + " (stt_temperature, stt_date) "
             + "VALUES (?, ?) ";
 
@@ -19,14 +20,13 @@ public class DatabaseService {
         return DriverManager.getConnection(dbUrl, username, password);
     }
 
-    public void addTemperature(String temperature) {
-        Timestamp currentTimestamp = new Timestamp(new java.util.Date().getTime());
+    public void addTemperature(BigDecimal temperature, Timestamp timestamp) {
         try {
             Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    INSERT_LOG);
-            preparedStatement.setString(1, temperature);
-            preparedStatement.setTimestamp(2, currentTimestamp);
+                    INSERT_TEMPERATURE);
+            preparedStatement.setString(1, temperature.toString());
+            preparedStatement.setTimestamp(2, timestamp);
             int i = preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

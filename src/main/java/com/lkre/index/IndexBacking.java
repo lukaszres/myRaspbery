@@ -1,10 +1,6 @@
 package com.lkre.index;
 
 import javax.faces.bean.ManagedBean;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import com.lkre.index.services.DatabaseService;
 
 @ManagedBean
@@ -12,6 +8,7 @@ public class IndexBacking {
 
     private String firstName = "John";
     private String lastName = "Doe";
+    private DatabaseService databaseService = new DatabaseService();
 
     public String getFirstName() {
         return firstName;
@@ -34,8 +31,6 @@ public class IndexBacking {
     }
 
     public String readTemperatures() {
-        DatabaseService databaseService = new DatabaseService();
-        databaseService.addTemperature("index");
 
         return "brak pliku";
     }

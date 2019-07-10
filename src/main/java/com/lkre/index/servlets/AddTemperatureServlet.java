@@ -3,9 +3,14 @@ package com.lkre.index.servlets;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.primefaces.json.JSONObject;
 import com.lkre.index.services.DatabaseService;
 
 public class AddTemperatureServlet extends HttpServlet {
@@ -26,8 +31,23 @@ public class AddTemperatureServlet extends HttpServlet {
         } catch (Exception e) { /*report an error*/ }
 
         String content = jb.toString();
+
+        JSONObject jsonObject = new JSONObject(content);
+        BigDecimal temp = jsonObject.getBigDecimal("temp");
+        String date = (String) jsonObject.get("date");
+
+        Timestamp timestamp = null;
+        try {
+            String pattern2 = "yyyy-MM-dd hh:mm:ss.SSSSSS";
+            SimpleDateFormat dateFormat = new SimpleDateFormat(pattern2);
+            Date date1 = dateFormat.parse(date);
+            timestamp = new java.sql.Timestamp(date1.getTime());
+        } catch (Exception e) { //this generic but you can control another types of exception
+            // look the origin of exception
+        }
+
         DatabaseService databaseService = new DatabaseService();
-        databaseService.addTemperature(content);
+        databaseService.addTemperature(temp, timestamp);
 
         PrintWriter out = response.getWriter();
         out.write("Everything is ok");
