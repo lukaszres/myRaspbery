@@ -34,17 +34,8 @@ public class AddTemperatureServlet extends HttpServlet {
 
         JSONObject jsonObject = new JSONObject(content);
         BigDecimal temp = jsonObject.getBigDecimal("temp");
-        String date = (String) jsonObject.get("date");
-
-        Timestamp timestamp = null;
-        try {
-            String pattern2 = "yyyy-MM-dd hh:mm:ss.SSSSSS";
-            SimpleDateFormat dateFormat = new SimpleDateFormat(pattern2);
-            Date date1 = dateFormat.parse(date);
-            timestamp = new java.sql.Timestamp(date1.getTime());
-        } catch (Exception e) { //this generic but you can control another types of exception
-            // look the origin of exception
-        }
+        String dateString = (String) jsonObject.get("date");
+        Timestamp timestamp = Timestamp.valueOf(dateString);
 
         DatabaseService databaseService = new DatabaseService();
         databaseService.addTemperature(temp, timestamp);
