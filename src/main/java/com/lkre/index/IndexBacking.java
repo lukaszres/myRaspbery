@@ -95,4 +95,7 @@ public class IndexBacking {
         return dateModel;
     }
 
+    public int totalTemperatures() {
+        return databaseService.getTemperaturesNumber();
+    }
 }

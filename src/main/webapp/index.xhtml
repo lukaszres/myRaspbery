@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
@@ -12,27 +13,29 @@
     <h:form>
 
         <!--<p:panel header="PrimeFaces Hello World Example">-->
-            <!--<h:panelGrid columns="2" cellpadding="4">-->
-                <!--<h:outputText value="First Name: " />-->
-                <!--<p:inputText value="#{indexBacking.firstName}" />-->
+        <!--<h:panelGrid columns="2" cellpadding="4">-->
+        <!--<h:outputText value="First Name: " />-->
+        <!--<p:inputText value="#{indexBacking.firstName}" />-->
 
-                <!--<h:outputText value="Last Name: " />-->
-                <!--<p:inputText value="#{indexBacking.lastName}" />-->
+        <!--<h:outputText value="Last Name: " />-->
+        <!--<p:inputText value="#{indexBacking.lastName}" />-->
 
-                <!--<p:commandButton value="Submit" update="greeting"-->
-                                 <!--oncomplete="PF('greetingDialog').show()" />-->
-            <!--</h:panelGrid>-->
+        <!--<p:commandButton value="Submit" update="greeting"-->
+        <!--oncomplete="PF('greetingDialog').show()" />-->
+        <!--</h:panelGrid>-->
         <!--</p:panel>-->
 
         <!--<p:dialog header="Greeting" widgetVar="greetingDialog"-->
-                  <!--modal="true" resizable="false">-->
-            <!--<h:panelGrid id="greeting" columns="1" cellpadding="4">-->
-                <!--<h:outputText value="#{indexBacking.showGreeting()}" />-->
-            <!--</h:panelGrid>-->
+        <!--modal="true" resizable="false">-->
+        <!--<h:panelGrid id="greeting" columns="1" cellpadding="4">-->
+        <!--<h:outputText value="#{indexBacking.showGreeting()}" />-->
+        <!--</h:panelGrid>-->
         <!--</p:dialog>-->
 
         <!--<h:outputText value="#{indexBacking.readLastTemperature()}" />-->
         <!--<h:outputText value="#{indexBacking.readTemperatures(24)}" />-->
+        <h:outputText value="Wszystkich pomiarów: #{indexBacking.totalTemperatures()}"
+                      style="font-weight: bold"/>
         <p:chart type="bar" model="#{indexBacking.barModel}" style="height:300px"/>
         <p:chart type="line" model="#{indexBacking.dateModel}" style="height:400px;"/>
     </h:form>
