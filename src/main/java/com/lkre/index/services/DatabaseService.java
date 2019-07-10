@@ -37,6 +37,7 @@ public class DatabaseService {
             preparedStatement.setBigDecimal(1, temperature);
             preparedStatement.setTimestamp(2, timestamp);
             int i = preparedStatement.executeUpdate();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -47,6 +48,7 @@ public class DatabaseService {
             Connection connection = getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(GET_LAST_TEMPERATURE);
+            connection.close();
             resultSet.next();
             return resultSet.getBigDecimal(1);
         } catch (SQLException e) {
@@ -63,6 +65,7 @@ public class DatabaseService {
                     GET_TEMPERATURES_WITH_TIMES);
             preparedStatement.setInt(1, number);
             ResultSet rs = preparedStatement.executeQuery();
+            connection.close();
 
             List<Pair> pairs = new ArrayList<>();
 
@@ -86,6 +89,7 @@ public class DatabaseService {
                     GET_TEMPERATURES_WITH_TIMES);
             preparedStatement.setInt(1, number);
             ResultSet rs = preparedStatement.executeQuery();
+            connection.close();
             ArrayList<Float> floats = new ArrayList<>();
             while (rs.next()) {
                 float n = rs.getFloat("stt_temperature");
