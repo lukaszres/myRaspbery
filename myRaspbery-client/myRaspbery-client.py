@@ -1,8 +1,9 @@
 import urllib.request
 import json
 import datetime
+import time
 
-myurl = "http://localhost:8080/addTemperature"
+myurl = "https://my-raspberry.herokuapp.com/addTemperature"
 
 
 def prepareJson(temperature):
@@ -17,8 +18,23 @@ def prepareRequest(content):
     req.add_header('Content-Length', len(content))
     return req
 
+def readSensor():
+    return 21.45
 
-newJson = prepareJson(25.4)
-req = prepareRequest(newJson)
-print (newJson)
-response = urllib.request.urlopen(req, newJson)
+def getAverage(array):
+    sum = 0;
+    for n in array:
+        sum += n
+    return sum / len(array)
+
+while True:
+    i = 0;
+    result = [0]*10
+    while i<10:
+        result[i] = readSensor()
+        time.sleep(1)
+        i+=1
+    newJson = prepareJson(getAverage(result))
+    req = prepareRequest(newJson)
+    print (newJson)
+    response = urllib.request.urlopen(req, newJson)
