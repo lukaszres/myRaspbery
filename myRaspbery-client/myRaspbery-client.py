@@ -2,6 +2,7 @@ import urllib.request
 import json
 import datetime
 import time
+import w1thermsensor
 
 myurl = "https://my-raspberry.herokuapp.com/addTemperature"
 
@@ -19,7 +20,8 @@ def prepareRequest(content):
     return req
 
 def readSensor():
-    return 21.45
+    sensor = w1thermsensor.W1ThermSensor()
+    return sensor.get_temperature()
 
 def getAverage(array):
     sum = 0;
