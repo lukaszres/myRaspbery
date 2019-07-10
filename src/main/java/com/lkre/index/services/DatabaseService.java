@@ -2,6 +2,7 @@ package com.lkre.index.services;
 
 import java.math.BigDecimal;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import com.lkre.index.models.Pair;
@@ -72,7 +73,8 @@ public class DatabaseService {
             while (rs.next()) {
                 float n = rs.getFloat("stt_temperature");
                 Timestamp timestamp = rs.getTimestamp("stt_date");
-                pairs.add(new Pair<>(timestamp, n));
+                Timestamp timestamp1 = Timestamp.valueOf(timestamp.toLocalDateTime().minusHours(2));
+                pairs.add(new Pair<>(timestamp1, n));
             }
             return pairs;
         } catch (SQLException e) {

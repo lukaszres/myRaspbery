@@ -34,7 +34,7 @@
         <h:outputText value="#{indexBacking.readLastTemperature()}" />
         <h:outputText value="#{indexBacking.readTemperatures(24)}" />
         <p:chart type="bar" model="#{indexBacking.barModel}" style="height:300px"/>
-
+        <p:chart type="line" model="#{indexBacking.dateModel}" style="height:400px;"/>
     </h:form>
 </h:body>
 </html>
