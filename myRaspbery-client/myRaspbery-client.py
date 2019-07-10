@@ -5,7 +5,7 @@ import urllib.request
 import w1thermsensor
 
 myurl = "https://my-raspberry.herokuapp.com/addTemperature"
-t = 60 * 60  # how often send data to server in seconds
+t = 60 * 5  # how often send data to server in seconds
 
 
 def prepareJson(temperature):
