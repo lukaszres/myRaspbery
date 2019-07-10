@@ -4,7 +4,7 @@ CREATE SEQUENCE tb_temperatures_stt_id_seq
 CREATE TABLE tb_temperatures
 (
     stt_id integer NOT NULL DEFAULT nextval ('tb_temperatures_stt_id_seq' :: regclass),
-    stt_temperature character varying(250),
+    stt_temperature decimal,
     stt_date timestamp with time zone NOT NULL,
     CONSTRAINT tb_stats_pkey PRIMARY KEY (stt_id)
 )
