@@ -31,7 +31,9 @@
             </h:panelGrid>
         </p:dialog>
 
-        <h:outputText value="#{indexBacking.readTemperatures()}" />
+        <h:outputText value="#{indexBacking.readLastTemperature()}" />
+        <h:outputText value="#{indexBacking.readTemperatures(24)}" />
+        <p:chart type="bar" model="#{indexBacking.barModel}" style="height:300px"/>
 
     </h:form>
 </h:body>

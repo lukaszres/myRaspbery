@@ -2,12 +2,19 @@ package com.lkre.index.services;
 
 import java.math.BigDecimal;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import com.lkre.index.models.Pair;
 
 public class DatabaseService {
 
     private final String INSERT_TEMPERATURE = "INSERT INTO tb_temperatures"
             + " (stt_temperature, stt_date) "
             + "VALUES (?, ?) ";
+
+    private final String GET_LAST_TEMPERATURE = "SELECT stt_temperature FROM tb_temperatures ORDER BY stt_date DESC LIMIT 1";
+    private final String GET_TEMPERATURES = "SELECT stt_temperature FROM tb_temperatures ORDER BY stt_date DESC LIMIT ?";
+    private final String GET_TEMPERATURES_WITH_TIMES = "SELECT * FROM tb_temperatures ORDER BY stt_date DESC LIMIT ?";
 
     private Connection getConnection() throws SQLException {
         String host = "ec2-54-217-234-157.eu-west-1.compute.amazonaws.com";
@@ -34,4 +41,62 @@ public class DatabaseService {
             e.printStackTrace();
         }
     }
+
+    public BigDecimal getLastTemperature() {
+        try {
+            Connection connection = getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(GET_LAST_TEMPERATURE);
+            resultSet.next();
+            return resultSet.getBigDecimal(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Pair> getMapTemperatures(int number) {
+        try {
+            Connection connection = getConnection();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    GET_TEMPERATURES_WITH_TIMES);
+            preparedStatement.setInt(1, number);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            List<Pair> pairs = new ArrayList<>();
+
+            while (rs.next()) {
+                float n = rs.getFloat("stt_temperature");
+                Date date = rs.getDate("stt_date");
+                pairs.add(new Pair<>(date, n));
+            }
+            return pairs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Float> getTemperatures(int number) {
+        try {
+            Connection connection = getConnection();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    GET_TEMPERATURES_WITH_TIMES);
+            preparedStatement.setInt(1, number);
+            ResultSet rs = preparedStatement.executeQuery();
+            ArrayList<Float> floats = new ArrayList<>();
+            while (rs.next()) {
+                float n = rs.getFloat("stt_temperature");
+                floats.add(n);
+            }
+
+            return floats;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
