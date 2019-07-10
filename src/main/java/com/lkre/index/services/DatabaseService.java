@@ -73,8 +73,8 @@ public class DatabaseService {
             while (rs.next()) {
                 float n = rs.getFloat("stt_temperature");
                 Timestamp timestamp = rs.getTimestamp("stt_date");
-                Timestamp timestamp1 = Timestamp.valueOf(timestamp.toLocalDateTime().minusHours(2));
-                pairs.add(new Pair<>(timestamp1, n));
+//                Timestamp timestamp1 = Timestamp.valueOf(timestamp.toLocalDateTime().minusHours(2));
+                pairs.add(new Pair<>(timestamp, n));
             }
             return pairs;
         } catch (SQLException e) {
