@@ -11,28 +11,28 @@
 <h:body>
     <h:form>
 
-        <p:panel header="PrimeFaces Hello World Example">
-            <h:panelGrid columns="2" cellpadding="4">
-                <h:outputText value="First Name: " />
-                <p:inputText value="#{indexBacking.firstName}" />
+        <!--<p:panel header="PrimeFaces Hello World Example">-->
+            <!--<h:panelGrid columns="2" cellpadding="4">-->
+                <!--<h:outputText value="First Name: " />-->
+                <!--<p:inputText value="#{indexBacking.firstName}" />-->
 
-                <h:outputText value="Last Name: " />
-                <p:inputText value="#{indexBacking.lastName}" />
+                <!--<h:outputText value="Last Name: " />-->
+                <!--<p:inputText value="#{indexBacking.lastName}" />-->
 
-                <p:commandButton value="Submit" update="greeting"
-                                 oncomplete="PF('greetingDialog').show()" />
-            </h:panelGrid>
-        </p:panel>
+                <!--<p:commandButton value="Submit" update="greeting"-->
+                                 <!--oncomplete="PF('greetingDialog').show()" />-->
+            <!--</h:panelGrid>-->
+        <!--</p:panel>-->
 
-        <p:dialog header="Greeting" widgetVar="greetingDialog"
-                  modal="true" resizable="false">
-            <h:panelGrid id="greeting" columns="1" cellpadding="4">
-                <h:outputText value="#{indexBacking.showGreeting()}" />
-            </h:panelGrid>
-        </p:dialog>
+        <!--<p:dialog header="Greeting" widgetVar="greetingDialog"-->
+                  <!--modal="true" resizable="false">-->
+            <!--<h:panelGrid id="greeting" columns="1" cellpadding="4">-->
+                <!--<h:outputText value="#{indexBacking.showGreeting()}" />-->
+            <!--</h:panelGrid>-->
+        <!--</p:dialog>-->
 
-        <h:outputText value="#{indexBacking.readLastTemperature()}" />
-        <h:outputText value="#{indexBacking.readTemperatures(24)}" />
+        <!--<h:outputText value="#{indexBacking.readLastTemperature()}" />-->
+        <!--<h:outputText value="#{indexBacking.readTemperatures(24)}" />-->
         <p:chart type="bar" model="#{indexBacking.barModel}" style="height:300px"/>
         <p:chart type="line" model="#{indexBacking.dateModel}" style="height:400px;"/>
     </h:form>
