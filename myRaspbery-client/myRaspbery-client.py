@@ -44,4 +44,7 @@ while True:
     newJson = prepareJson(getAverage(result))
     req = prepareRequest(newJson)
     print (newJson)
-    response = urllib.request.urlopen(req, newJson)
+    try:
+        response = urllib.request.urlopen(req, newJson)
+    except:
+        print ('Cannot connect to server')
