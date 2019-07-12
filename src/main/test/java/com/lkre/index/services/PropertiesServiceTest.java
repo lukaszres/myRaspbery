@@ -11,7 +11,7 @@ public class PropertiesServiceTest {
         //given
         PropertiesService propertiesService = new PropertiesService();
         //when
-        String actual = propertiesService.getPropertyService("firstProperty");
+        String actual = propertiesService.getProperty("firstProperty");
         String expected = "first property";
         //then
         Assert.assertEquals(expected, actual);
@@ -22,7 +22,7 @@ public class PropertiesServiceTest {
         //given
         PropertiesService propertiesService = new PropertiesService();
         //when
-        String actual = propertiesService.getPropertyService("host-property");
+        String actual = propertiesService.getProperty("host-property");
         String expected = "https://192.168.0.1";
         //then
         Assert.assertEquals(expected, actual);

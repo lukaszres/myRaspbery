@@ -21,11 +21,11 @@ public class DatabaseService {
     }
 
     private Connection getConnection() throws SQLException {
-        String host = propertiesService.getPropertyService("database-host");
-        String username = propertiesService.getPropertyService("database-username");
-        String password = propertiesService.getPropertyService("database-password");
-        String port = propertiesService.getPropertyService("database-port");
-        String dataBase = propertiesService.getPropertyService("database-name");
+        String host = propertiesService.getProperty("database-host");
+        String username = propertiesService.getProperty("database-username");
+        String password = propertiesService.getProperty("database-password");
+        String port = propertiesService.getProperty("database-port");
+        String dataBase = propertiesService.getProperty("database-name");
         String dbUrl = "jdbc:postgresql://" + host + ":" + port + "/" + dataBase + "?sslmode" +
                 "=require";
         return DriverManager.getConnection(dbUrl, username, password);

@@ -8,15 +8,15 @@ import java.util.Properties;
 public class PropertiesService {
 
     private static final String fileName = "config.properties";
-    InputStream inputStream;
-    Properties properties;
+    private InputStream inputStream;
+    private Properties properties;
 
     public PropertiesService() throws IOException {
         properties = new Properties();
         readProperties();
     }
 
-    public String getPropertyService(String propertyKey) {
+    public String getProperty(String propertyKey) {
         return properties.getProperty(propertyKey);
     }
 

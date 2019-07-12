@@ -1,71 +1,32 @@
 package com.lkre.index;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import org.primefaces.model.chart.*;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.DateAxis;
+import org.primefaces.model.chart.LineChartModel;
+import org.primefaces.model.chart.LineChartSeries;
 import com.lkre.index.models.Pair;
+import com.lkre.index.services.ForecastService;
 import com.lkre.index.services.database.DatabaseService;
+import lombok.Getter;
 
 @ManagedBean
 public class IndexBacking {
 
-    private String firstName = "John";
-    private String lastName = "Doe";
     private DatabaseService databaseService = new DatabaseService();
-    private BarChartModel barModel;
+    @Getter
     private LineChartModel dateModel;
 
     public IndexBacking() throws IOException {}
 
     @PostConstruct
     public void init() {
-        barModel = new BarChartModel();
-        ChartSeries chartSeries = new ChartSeries();
-        chartSeries.setLabel("Temperatury");
         List<Pair> mapTemperatures = databaseService.getMapTemperatures(24);
-        for (Pair entry : mapTemperatures) {
-            chartSeries.set(entry.getL(), (float) entry.getR());
-        }
-        barModel.addSeries(chartSeries);
         createDateModel(mapTemperatures);
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String showGreeting() {
-        return "Hello " + firstName + " " + lastName + "!";
-    }
-
-    public String readLastTemperature() {
-        BigDecimal lastTemperature = databaseService.getLastTemperature();
-        return "Ostatnia temperatura: " + lastTemperature;
-    }
-
-    public String readTemperatures(int number) {
-        List<Float> temperatures = databaseService.getTemperatures(number);
-        return "Ostatnie " + number + "temperatur to: " + temperatures;
-    }
-
-    public BarChartModel getBarModel() {
-        return barModel;
     }
 
     private void createDateModel(List<Pair> mapTemperatures) {
@@ -97,11 +58,13 @@ public class IndexBacking {
                  .put(AxisType.X, axis);
     }
 
-    public LineChartModel getDateModel() {
-        return dateModel;
-    }
-
     public int totalTemperatures() {
         return databaseService.getTemperaturesNumber();
+    }
+
+    public String getActualTemperatureFromOpenWeather() throws IOException {
+        ForecastService forecastService = new ForecastService();
+        double actualTemperature = forecastService.getActualTemperatureInCelsius();
+        return Double.toString(actualTemperature);
     }
 }
