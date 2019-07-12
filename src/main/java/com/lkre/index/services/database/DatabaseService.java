@@ -1,12 +1,16 @@
-package com.lkre.index.services;
+package com.lkre.index.services.database;
 
-import com.lkre.index.models.Pair;
-
+import static com.lkre.index.services.database.SQLQueries.GET_LAST_TEMPERATURE;
+import static com.lkre.index.services.database.SQLQueries.GET_TEMPERATURES_NUMBER;
+import static com.lkre.index.services.database.SQLQueries.GET_TEMPERATURES_WITH_TIMES;
+import static com.lkre.index.services.database.SQLQueries.INSERT_TEMPERATURE;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import com.lkre.index.models.Pair;
+import com.lkre.index.services.PropertiesService;
 
 public class DatabaseService {
 
@@ -15,18 +19,6 @@ public class DatabaseService {
     public DatabaseService() throws IOException {
         propertiesService = new PropertiesService();
     }
-
-    private final String INSERT_TEMPERATURE = "INSERT INTO tb_temperatures"
-            + " (stt_temperature, stt_date) "
-            + "VALUES (?, ?) ";
-
-    private final String GET_LAST_TEMPERATURE = "SELECT stt_temperature FROM tb_temperatures " +
-            "ORDER BY stt_date DESC LIMIT 1";
-    private final String GET_TEMPERATURES = "SELECT stt_temperature FROM tb_temperatures ORDER BY" +
-            " stt_date DESC LIMIT ?";
-    private final String GET_TEMPERATURES_WITH_TIMES = "SELECT * FROM tb_temperatures ORDER BY " +
-            "stt_date DESC LIMIT ?";
-    private final String GET_TEMPERATURES_NUMBER = "SELECT COUNT(*) FROM tb_temperatures";
 
     private Connection getConnection() throws SQLException {
         String host = propertiesService.getPropertyService("database-host");

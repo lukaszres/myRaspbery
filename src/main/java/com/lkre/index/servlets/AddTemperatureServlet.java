@@ -5,13 +5,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.primefaces.json.JSONObject;
-import com.lkre.index.services.DatabaseService;
+import com.lkre.index.services.database.DatabaseService;
 
 public class AddTemperatureServlet extends HttpServlet {
 

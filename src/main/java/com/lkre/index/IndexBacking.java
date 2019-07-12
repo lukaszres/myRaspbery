@@ -8,7 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import org.primefaces.model.chart.*;
 import com.lkre.index.models.Pair;
-import com.lkre.index.services.DatabaseService;
+import com.lkre.index.services.database.DatabaseService;
 
 @ManagedBean
 public class IndexBacking {
