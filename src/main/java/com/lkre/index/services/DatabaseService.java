@@ -2,12 +2,19 @@ package com.lkre.index.services;
 
 import com.lkre.index.models.Pair;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseService {
+
+    private PropertiesService propertiesService;
+
+    public DatabaseService() throws IOException {
+        propertiesService = new PropertiesService();
+    }
 
     private final String INSERT_TEMPERATURE = "INSERT INTO tb_temperatures"
             + " (stt_temperature, stt_date) "
@@ -22,11 +29,11 @@ public class DatabaseService {
     private final String GET_TEMPERATURES_NUMBER = "SELECT COUNT(*) FROM tb_temperatures";
 
     private Connection getConnection() throws SQLException {
-        String host = "ec2-54-217-234-157.eu-west-1.compute.amazonaws.com";
-        String username = "kgstaylndjlftv";
-        String password = "3b7355b06d43c72b3042b6958257f7cc7b545800aab8d5f048a004cd02204bee";
-        String port = "5432";
-        String dataBase = "dcfvmna0pvh26i";
+        String host = propertiesService.getPropertyService("database-host");
+        String username = propertiesService.getPropertyService("database-username");
+        String password = propertiesService.getPropertyService("database-password");
+        String port = propertiesService.getPropertyService("database-port");
+        String dataBase = propertiesService.getPropertyService("database-name");
         String dbUrl = "jdbc:postgresql://" + host + ":" + port + "/" + dataBase + "?sslmode" +
                 "=require";
         return DriverManager.getConnection(dbUrl, username, password);
