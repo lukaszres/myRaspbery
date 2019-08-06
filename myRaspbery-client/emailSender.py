@@ -1,6 +1,6 @@
+# coding=utf-8
 import smtplib
 from logger import Logger
-
 
 class EmailSender:
     logger = ""
@@ -10,7 +10,7 @@ class EmailSender:
 
     def send(self, subject, message):
         gmail_user = "my.app.raspberry@gmail.com"
-        gmail_password = "09Thoine"
+        gmail_password = "xxxx"
 
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.ehlo()
