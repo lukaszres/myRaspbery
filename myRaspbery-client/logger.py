@@ -1,5 +1,6 @@
 import logging
 import os
+from logging.handlers import TimedRotatingFileHandler
 
 
 class Logger:
@@ -15,19 +16,12 @@ class Logger:
         fileName = loggerName
         fileHandler = logging.FileHandler("{0}/{1}.log".format(logPath, fileName))
         fileHandler.setFormatter(logFormatter)
+        timeHandler = TimedRotatingFileHandler(logPath + "//common.log", when="w0", interval=1, backupCount=5)
         rootLogger.addHandler(fileHandler)
+        rootLogger.addHandler(timeHandler)
 
         consoleHandler = logging.StreamHandler()
         consoleHandler.setFormatter(logFormatter)
         rootLogger.addHandler(consoleHandler)
         rootLogger.setLevel(logging.INFO)
         return rootLogger
-
-
-# logger = Logger()
-# commonLogger = logger.getLogger("common")
-# commonLogger.debug('This is a debug message')
-# commonLogger.info('This is an info message')
-# commonLogger.warning('This is a warning message')
-# commonLogger.error('This is an error message')
-# commonLogger.critical('This is a critical message')
