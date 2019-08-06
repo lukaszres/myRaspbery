@@ -11,7 +11,7 @@ class Logger:
         logPath = os.getcwd() + "//logs"
         rootLogger = logging.getLogger(loggerName)
         self.createLogsDirectory(logPath)
-        logFormatter = logging.Formatter("%(asctime)s [%(threadName)-12.12s] [%(levelname)-8.8s]  %(message)s")
+        logFormatter = logging.Formatter("%(asctime)s [%(threadName)-12.12s] [%(levelname)-4.8s]  %(message)s")
         fileName = loggerName
         fileHandler = logging.FileHandler("{0}/{1}.log".format(logPath, fileName))
         fileHandler.setFormatter(logFormatter)
@@ -20,6 +20,7 @@ class Logger:
         consoleHandler = logging.StreamHandler()
         consoleHandler.setFormatter(logFormatter)
         rootLogger.addHandler(consoleHandler)
+        rootLogger.setLevel(logging.INFO)
         return rootLogger
 
 
