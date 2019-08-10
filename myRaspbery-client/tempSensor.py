@@ -68,4 +68,4 @@ while True:
         if status != 0:
             status = 0
             send(status)
-    sleep(1)
+    sleep(300)
