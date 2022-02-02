@@ -14,7 +14,7 @@
         <servlet.version>3.1.0</servlet.version>
         <jsf.version>2.2.15</jsf.version>
         <primefaces.version>6.1</primefaces.version>
-        <postgresql.version>42.2.5</postgresql.version>
+        <postgresql.version>42.2.25</postgresql.version>
     </properties>
     <dependencies>
         <dependency>
